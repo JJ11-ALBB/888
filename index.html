@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自动算账博彩账本</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>博彩账本 - 自动算账</h1>
+
+  <!-- 登录/注册区 -->
+  <div id="auth-section">
+    <h2>登录</h2>
+    <input type="email" id="email" placeholder="请输入邮箱">
+    <input type="password" id="password" placeholder="请输入密码">
+    <button onclick="login()">登录</button>
+    <button onclick="register()">注册</button>
+  </div>
+
+  <!-- 记录输入区 -->
+  <div id="record-section" style="display: none;">
+    <h2>添加投注记录</h2>
+    <form id="record-form">
+      <input type="date" id="date" required>
+      <input type="text" id="project" placeholder="项目" required>
+      <input type="number" id="amount" placeholder="金额" required>
+      <select id="result">
+        <option value="win">赢</option>
+        <option value="lose">输</option>
+        <option value="draw">平</option>
+        <option value="refund">退款</option>
+      </select>
+      <input type="text" id="tags" placeholder="标签" required>
+      <input type="text" id="notes" placeholder="备注">
+      <button type="submit">提交记录</button>
+    </form>
+
+    <h2>记录列表</h2>
+    <table id="record-table">
+      <thead>
+        <tr><th>日期</th><th>项目</th><th>金额</th><th>结果</th><th>标签</th><th>备注</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2 id="summary">总盈亏：¥0</h2>
+    <h2>盈亏趋势</h2>
+    <canvas id="lineChart"></canvas>
+
+    <h2>项目分布</h2>
+    <canvas id="pieChart"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
